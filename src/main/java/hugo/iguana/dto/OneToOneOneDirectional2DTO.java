@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 @EqualsAndHashCode(exclude = {"dtCreation"})
-public class OrderDTO implements Serializable {
+public class OneToOneOneDirectional2DTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private LocalDateTime dtCreation;
 
-    private CustomerDTO customer;
+    private OneToOneOneDirectional1DTO customer;
 }

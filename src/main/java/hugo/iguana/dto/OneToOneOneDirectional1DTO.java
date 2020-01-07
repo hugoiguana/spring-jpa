@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Builder
 @ToString
 @EqualsAndHashCode(exclude = {"password"})
-public class CustomerDTO implements Serializable {
+public class OneToOneOneDirectional1DTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
