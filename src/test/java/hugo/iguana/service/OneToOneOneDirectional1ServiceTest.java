@@ -73,12 +73,6 @@ Hibernate:
         */
     }
 
-    @Test(expected = LazyInitializationException.class)
-    public void findByIdLazyException() {
-        Optional<OneToOneOneDirectional1> oneOptional = service.findById(Long.valueOf(1));
-        oneOptional.get().getOneToOneOneDirectional3().toString();
-    }
-
     @Test
     public void findByIdLazyLoaded() {
         Optional<OneToOneOneDirectional1> oneOptional = service.findByIdLazy(Long.valueOf(1));
@@ -108,6 +102,12 @@ Hibernate:
     where
         onetooneon0_.oto3_id=?
         */
+    }
+
+    @Test(expected = LazyInitializationException.class)
+    public void findByIdLazyException() {
+        Optional<OneToOneOneDirectional1> oneOptional = service.findById(Long.valueOf(1));
+        oneOptional.get().getOneToOneOneDirectional3().toString();
     }
 
 }
