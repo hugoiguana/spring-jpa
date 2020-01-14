@@ -1,4 +1,4 @@
-package hugo.iguana.service;
+package hugo.iguana.service.onetoone;
 
 import hugo.iguana.AbstractTest;
 import hugo.iguana.domain.onetoone.OneToOneOneDirectional1;
