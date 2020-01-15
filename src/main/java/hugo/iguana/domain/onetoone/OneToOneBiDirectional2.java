@@ -31,4 +31,10 @@ public class OneToOneBiDirectional2 implements Serializable {
     @OneToOne(mappedBy = "oneToOneBiDirectional2")
     private OneToOneBiDirectional1 oneToOneBiDirectional1;
 
+    public void removeOneToOneBiDirectional1(OneToOneBiDirectional1 o1) {
+        if (o1 != null) {
+            oneToOneBiDirectional1 = null;
+            o1.setOneToOneBiDirectional2(null);
+        }
+    }
 }

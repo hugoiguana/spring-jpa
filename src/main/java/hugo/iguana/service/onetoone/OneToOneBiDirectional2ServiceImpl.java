@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class OneToOneBiDirectional2ServiceImpl implements OneToOneBiDirectional2Service {
 
@@ -16,8 +18,14 @@ public class OneToOneBiDirectional2ServiceImpl implements OneToOneBiDirectional2
     private OneToOneBiDirectional2Repository repository;
 
     @Autowired
-    private OneToOneBiDirectional1Repository oneToOneBiDirectional1Repository;
+    private OneToOneBiDirectional1Service oneToOneBiDirectional1Service;
 
+
+
+    @Override
+    public Optional<OneToOneBiDirectional2> findById(Long id) {
+        return repository.findById(id);
+    }
 
     @Override
     public OneToOneBiDirectional2 save(OneToOneBiDirectional2 oneToOneBiDirectional2) {
@@ -32,7 +40,9 @@ public class OneToOneBiDirectional2ServiceImpl implements OneToOneBiDirectional2
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public OneToOneBiDirectional1 teste(OneToOneBiDirectional1 oneToOneBiDirectional1) {
-        oneToOneBiDirectional1 = oneToOneBiDirectional1Repository.save(oneToOneBiDirectional1);
+
+
+        oneToOneBiDirectional1 = oneToOneBiDirectional1Service.save(oneToOneBiDirectional1);
         return oneToOneBiDirectional1;
     }
 }

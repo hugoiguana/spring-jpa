@@ -13,8 +13,15 @@ public interface OneToOneBiDirectional1Service {
 
     List<OneToOneBiDirectional1> findAll();
 
-    OneToOneBiDirectional1 save(OneToOneBiDirectional1 OneToOneBiDirectional1);
+    OneToOneBiDirectional1 save(OneToOneBiDirectional1 o1);
 
-    void delete(OneToOneBiDirectional1 OneToOneBiDirectional1);
+    OneToOneBiDirectional1 insert1(OneToOneBiDirectional1 o1);
 
+    OneToOneBiDirectional1 insert2(OneToOneBiDirectional1 o1);
+
+    void delete(OneToOneBiDirectional1 o1);
+
+    void delete1(OneToOneBiDirectional1 o1);
+    void delete2(OneToOneBiDirectional1 o1);
+    void delete3(OneToOneBiDirectional1 o1);
 }

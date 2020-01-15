@@ -6,10 +6,10 @@ import hugo.iguana.domain.onetoone.OneToOneBiDirectional2;
 import hugo.iguana.domain.onetoone.OneToOneBiDirectional3;
 import hugo.iguana.domain.onetoone.OneToOneBiDirectional4;
 import org.hibernate.LazyInitializationException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import java.util.Optional;
 
@@ -21,13 +21,13 @@ public class OneToOneBiDirectional1ServiceTest extends AbstractTest {
     private OneToOneBiDirectional1Service service;
 
     @Autowired
-    private OneToOneBiDirectional2Service oneToOneOneDirectional2Service;
+    private OneToOneBiDirectional2Service oneToOneBiDirectional2Service;
 
     @Autowired
-    private OneToOneBiDirectional3Service oneToOneOneDirectional3Service;
+    private OneToOneBiDirectional3Service oneToOneBiDirectional3Service;
 
     @Autowired
-    private OneToOneBiDirectional4Service oneToOneOneDirectional4Service;
+    private OneToOneBiDirectional4Service oneToOneBiDirectional4Service;
 
     @Before
     public void setup() {
@@ -45,9 +45,9 @@ public class OneToOneBiDirectional1ServiceTest extends AbstractTest {
         oneToOneBiDirectional1.setOneToOneBiDirectional3(oneToOneBiDirectional3);
         oneToOneBiDirectional1.setOneToOneBiDirectional4(oneToOneBiDirectional4);
 
-        oneToOneOneDirectional2Service.save(oneToOneBiDirectional2);
-        oneToOneOneDirectional3Service.save(oneToOneBiDirectional3);
-        oneToOneOneDirectional4Service.save(oneToOneBiDirectional4);
+        oneToOneBiDirectional2Service.save(oneToOneBiDirectional2);
+        oneToOneBiDirectional3Service.save(oneToOneBiDirectional3);
+        oneToOneBiDirectional4Service.save(oneToOneBiDirectional4);
         service.save(oneToOneBiDirectional1);
     }
 
@@ -123,6 +123,104 @@ Hibernate:
         Optional<OneToOneBiDirectional1> oneOptional = service.findById(Long.valueOf(1));
         oneOptional.get().getOneToOneBiDirectional3().toString();
     }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void save_NotSavingTransientyProperty() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.setOneToOneBiDirectional2(o2);
+        service.save(o1);
+    }
+
+    @Test
+    public void save_savingTransientyProperty() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.setOneToOneBiDirectional2(o2);
+        oneToOneBiDirectional2Service.save(o2);
+        service.save(o1);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void insert1_savingReferencingOnlyOneSide() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.setOneToOneBiDirectional2(o2);
+        service.insert1(o1);
+    }
+
+    @Test
+    public void insert1_savingReferencingBothSide() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.addOneToOneBiDirectional2(o2);
+        service.insert1(o1);
+    }
+
+    @Test
+    public void delete() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.addOneToOneBiDirectional2(o2);
+        o1 = service.insert1(o1);
+        service.delete(o1);
+        o2 = oneToOneBiDirectional2Service.findById(o1.getOneToOneBiDirectional2().getId()).get();
+        System.out.println(o2.toString());
+    }
+
+    @Test
+    public void delete_NotRemovedReferencedEntity() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.addOneToOneBiDirectional2(o2);
+        o1 = service.insert1(o1);
+        service.delete1(o1);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void delete_RemovedReferencedEntityFromTheJPALoadedObject() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.addOneToOneBiDirectional2(o2);
+        o1 = service.insert1(o1);
+        service.delete2(o1);
+    }
+
+    @Test
+    public void delete_RemovedReferencedEntityButNotFromTheJPALoadedObject() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.addOneToOneBiDirectional2(o2);
+        o1 = service.insert1(o1);
+        service.delete3(o1);
+    }
+
+
+ /*   @Test
+    public void save_savingTransientyProperty() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.setOneToOneBiDirectional2(o2);
+        oneToOneOneDirectional2Service.save(o2);
+        service.save(o1);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void insert1_savingReferencingOnlyOneSide() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.setOneToOneBiDirectional2(o2);
+        service.insert1(o1);
+    }
+
+    @Test
+    public void insert1_savingReferencingBothSide() {
+        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
+        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
+        o1.addOneToOneBiDirectional2(o2);
+        service.insert1(o1);
+    }
+*/
 
 }
 

@@ -42,4 +42,10 @@ public class OneToOneBiDirectional1 implements Serializable {
     @JoinColumn(name = "otb4_id")
     private OneToOneBiDirectional4 oneToOneBiDirectional4;
 
+    public void addOneToOneBiDirectional2(OneToOneBiDirectional2 o2) {
+        if (o2 != null) {
+            o2.setOneToOneBiDirectional1(this);
+            oneToOneBiDirectional2 = o2;
+        }
+    }
 }
