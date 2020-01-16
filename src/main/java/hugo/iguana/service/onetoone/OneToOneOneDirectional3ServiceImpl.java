@@ -17,6 +17,11 @@ public class OneToOneOneDirectional3ServiceImpl implements OneToOneOneDirectiona
     }
 
     @Override
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
+    @Override
     public void delete(OneToOneOneDirectional3 oneToOneOneDirectional3) {
         repository.delete(oneToOneOneDirectional3);
     }

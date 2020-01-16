@@ -33,6 +33,11 @@ public class OneToOneBiDirectional2ServiceImpl implements OneToOneBiDirectional2
     }
 
     @Override
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
+    @Override
     public void delete(OneToOneBiDirectional2 oneToOneBiDirectional2) {
         repository.delete(oneToOneBiDirectional2);
     }

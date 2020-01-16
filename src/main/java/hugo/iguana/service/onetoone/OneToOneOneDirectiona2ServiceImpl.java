@@ -30,6 +30,11 @@ public class OneToOneOneDirectiona2ServiceImpl implements OneToOneOneDirectiona2
     }
 
     @Override
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public OneToOneOneDirectional1 teste(OneToOneOneDirectional1 oneToOneOneDirectional1) {
         oneToOneOneDirectional1 = oneToOneOneDirectional1Repository.save(oneToOneOneDirectional1);

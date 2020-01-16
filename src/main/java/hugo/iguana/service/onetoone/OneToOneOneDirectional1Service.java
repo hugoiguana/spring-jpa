@@ -15,6 +15,8 @@ public interface OneToOneOneDirectional1Service {
 
     OneToOneOneDirectional1 save(OneToOneOneDirectional1 oneToOneOneDirectional1);
 
+    void deleteAll();
+
     void delete(OneToOneOneDirectional1 oneToOneOneDirectional1);
 
 }

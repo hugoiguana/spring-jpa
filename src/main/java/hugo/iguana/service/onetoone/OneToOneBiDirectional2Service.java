@@ -13,5 +13,7 @@ public interface OneToOneBiDirectional2Service {
 
     void delete(OneToOneBiDirectional2 oneToOneBiDirectional2);
 
+    void deleteAll();
+
     OneToOneBiDirectional1 teste(OneToOneBiDirectional1 oneToOneBiDirectional1);
 }

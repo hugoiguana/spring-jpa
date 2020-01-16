@@ -10,8 +10,8 @@
     <packaging>jar</packaging>
 
 
-    <name>etimerregistration</name>
-    <description>ETimerRegistration</description>
+    <name>spring-jpa</name>
+    <description>spring-jpa</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

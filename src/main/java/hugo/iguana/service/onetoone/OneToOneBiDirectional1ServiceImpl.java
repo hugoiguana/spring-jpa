@@ -67,6 +67,12 @@ public class OneToOneBiDirectional1ServiceImpl implements OneToOneBiDirectional1
         return repository.save(o1);
     }
 
+
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
     @Override
     public void delete(OneToOneBiDirectional1 o1) {
         repository.delete(o1);

@@ -19,9 +19,13 @@ public interface OneToOneBiDirectional1Service {
 
     OneToOneBiDirectional1 insert2(OneToOneBiDirectional1 o1);
 
+    void deleteAll();
+
     void delete(OneToOneBiDirectional1 o1);
 
     void delete1(OneToOneBiDirectional1 o1);
+
     void delete2(OneToOneBiDirectional1 o1);
+
     void delete3(OneToOneBiDirectional1 o1);
 }

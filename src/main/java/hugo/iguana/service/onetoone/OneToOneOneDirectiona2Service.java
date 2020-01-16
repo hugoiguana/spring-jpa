@@ -4,7 +4,10 @@ import hugo.iguana.domain.onetoone.OneToOneOneDirectional1;
 import hugo.iguana.domain.onetoone.OneToOneOneDirectional2;
 
 public interface OneToOneOneDirectiona2Service {
+
     OneToOneOneDirectional2 save(OneToOneOneDirectional2 order);
+
+    void deleteAll();
 
     void delete(OneToOneOneDirectional2 order);
 

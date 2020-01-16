@@ -48,6 +48,11 @@ public class OneToOneOneDirectional1ServiceImpl implements OneToOneOneDirectiona
     }
 
     @Override
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
+    @Override
     public void delete(OneToOneOneDirectional1 oneToOneOneDirectional1) {
         repository.delete(oneToOneOneDirectional1);
     }
