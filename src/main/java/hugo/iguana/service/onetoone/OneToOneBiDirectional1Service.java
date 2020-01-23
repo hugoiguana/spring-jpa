@@ -13,6 +13,12 @@ public interface OneToOneBiDirectional1Service {
 
     List<OneToOneBiDirectional1> findAll();
 
+    OneToOneBiDirectional1 consultingAfterModifierAJpaObject(Long id);
+
+    OneToOneBiDirectional1 consultingAfterModifierAJpaObjectButUsingDetachThisTime(Long id);
+
+    OneToOneBiDirectional1 consultingAfterModifierAJpaObjectButUsingRefreshThisTime(Long id);
+
     OneToOneBiDirectional1 save(OneToOneBiDirectional1 o1);
 
     OneToOneBiDirectional1 insert1(OneToOneBiDirectional1 o1);

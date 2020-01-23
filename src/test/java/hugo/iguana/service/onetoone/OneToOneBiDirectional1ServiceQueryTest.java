@@ -15,10 +15,10 @@ import static org.junit.Assert.assertNotNull;
 
 public class OneToOneBiDirectional1ServiceQueryTest extends AbstractTest {
 
-    OneToOneBiDirectional1 oneToOneBiDirectional1;
-    OneToOneBiDirectional2 oneToOneBiDirectional2;
-    OneToOneBiDirectional3 oneToOneBiDirectional3;
-    OneToOneBiDirectional4 oneToOneBiDirectional4;
+    private OneToOneBiDirectional1 oneToOneBiDirectional1;
+    private OneToOneBiDirectional2 oneToOneBiDirectional2;
+    private OneToOneBiDirectional3 oneToOneBiDirectional3;
+    private OneToOneBiDirectional4 oneToOneBiDirectional4;
 
     @Before
     public void setup() {
@@ -110,65 +110,7 @@ Hibernate:
         oneOptional.get().getOneToOneBiDirectional3().toString();
     }
 
-   /* @Test(expected = InvalidDataAccessApiUsageException.class)
-    public void save_NotSavingTransientyProperty() {
-        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
-        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
-        o1.setOneToOneBiDirectional2(o2);
-        oneToOneBiDirectional1Service.save(o1);
-    }
 
-    @Test
-    public void save_savingTransientyProperty() {
-        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
-        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
-        o1.setOneToOneBiDirectional2(o2);
-        oneToOneBiDirectional2Service.save(o2);
-        oneToOneBiDirectional1Service.save(o1);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void insert1_savingReferencingOnlyOneSide() {
-        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
-        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
-        o1.setOneToOneBiDirectional2(o2);
-        oneToOneBiDirectional1Service.insert1(o1);
-    }
-
-    @Test
-    public void insert1_savingReferencingBothSide() {
-        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
-        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
-        o1.addOneToOneBiDirectional2(o2);
-        oneToOneBiDirectional1Service.insert1(o1);
-    }
-
-
- *//*   @Test
-    public void save_savingTransientyProperty() {
-        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
-        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
-        o1.setOneToOneBiDirectional2(o2);
-        oneToOneOneDirectional2Service.save(o2);
-        oneToOneBiDirectional1Service.save(o1);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void insert1_savingReferencingOnlyOneSide() {
-        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
-        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
-        o1.setOneToOneBiDirectional2(o2);
-        oneToOneBiDirectional1Service.insert1(o1);
-    }
-
-    @Test
-    public void insert1_savingReferencingBothSide() {
-        OneToOneBiDirectional1 o1 = OneToOneBiDirectional1.builder().name("Name 1 insert").build();
-        OneToOneBiDirectional2 o2 = OneToOneBiDirectional2.builder().name("Name 2 insert").build();
-        o1.addOneToOneBiDirectional2(o2);
-        oneToOneBiDirectional1Service.insert1(o1);
-    }
-*/
 
 }
 
