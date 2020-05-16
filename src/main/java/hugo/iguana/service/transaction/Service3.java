@@ -2,6 +2,7 @@ package hugo.iguana.service.transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import static hugo.iguana.util.Util.print;
@@ -67,6 +68,16 @@ public class Service3 {
         }
     }
 
+    public void method6() {
+        try {
+            service.methodException4();
+        } catch (Exception e) {
+            print("Treat the error");
+        }
+    }
+
+
+
     public void methodException1() {
         throw new RuntimeException("Error");
     }
@@ -79,5 +90,15 @@ public class Service3 {
     public static void methodException3() {
         throw new RuntimeException("Error");
     }
+
+    public void methodException4() {
+        try {
+            throw new RuntimeException("Error");
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+
 
 }

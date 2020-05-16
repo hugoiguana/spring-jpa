@@ -90,13 +90,4 @@ public class TransactionalTest {
         assertEquals(2, entities.size());
     }
 
-    @Test
-    public void t() {
-        oneToOneOneDirectional1Repository.saveAll(entitiesToInsert);
-        service1.method7("name2");
-        List<OneToOneOneDirectional1> entities = oneToOneOneDirectional1Service.findAll();
-        assertEquals(2, entities.size());
-    }
-
-
 }

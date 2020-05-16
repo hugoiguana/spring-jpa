@@ -42,5 +42,9 @@ public class TransactionalNoRollBackFor2Test {
         service3.method2();
     }
 
+    @Test(expected = UnexpectedRollbackException.class)
+    public void test3() {
+        service3.method6();
+    }
 
 }

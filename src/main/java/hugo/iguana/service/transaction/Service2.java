@@ -1,5 +1,8 @@
 package hugo.iguana.service.transaction;
 
+import hugo.iguana.domain.onetoone.OneToOneOneDirectional1;
+import hugo.iguana.service.onetoone.OneToOneOneDirectional1Service;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,6 +20,8 @@ public class Service2 {
     @Autowired
     private Service3 service3;
 
+    @Autowired
+    private OneToOneOneDirectional1Service oneToOneOneDirectional1Service;
 
     public void method1() {
         try {
@@ -82,6 +87,40 @@ public class Service2 {
         service3.method5();
     }
 
+    public void method11() {
+        service.methodException8();
+    }
+
+    public void method12(Long id, String newName) {
+        OneToOneOneDirectional1 entity = oneToOneOneDirectional1Service.findById(id).get();
+        try {
+            service.methodException9(entity, newName);
+        } catch (Exception e) {
+            print("Treat the error");
+        }
+    }
+
+    public void method13(Long id, String newName) {
+        OneToOneOneDirectional1 entity = oneToOneOneDirectional1Service.findById(id).get();
+        try {
+            service.methodException9(entity, newName);
+        } catch (Exception e) {
+            print("Treat the error");
+            throw e;
+        }
+    }
+
+    public void method14(Long id, String newName) {
+        OneToOneOneDirectional1 entity = oneToOneOneDirectional1Service.findById(id).get();
+        try {
+            service.methodException10(entity.getId(), newName);
+        } catch (Exception e) {
+            print("Treat the error");
+        }
+    }
+
+
+
 
     @Transactional(noRollbackFor = RuntimeException.class)
     public void methodException1() {
@@ -92,7 +131,7 @@ public class Service2 {
         throw new RuntimeException("Error");
     }
 
-    @Transactional(propagation = Propagation.NEVER)
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public void methodException3() {
         throw new RuntimeException("Error");
     }
@@ -111,6 +150,26 @@ public class Service2 {
     }
 
     public static void methodException7() {
+        throw new RuntimeException("Error");
+    }
+
+    public void methodException8() {
+        try {
+            throw new RuntimeException("Error");
+        } catch (Exception e) {
+        }
+    }
+
+    @Transactional(noRollbackFor = RuntimeException.class)
+    public void methodException9(OneToOneOneDirectional1 entity, String newName) {
+        entity.setName(newName);
+        throw new RuntimeException("Error");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void methodException10(Long id, String newName) {
+        OneToOneOneDirectional1 entity = oneToOneOneDirectional1Service.findById(id).get();
+        entity.setName(newName);
         throw new RuntimeException("Error");
     }
 
