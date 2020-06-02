@@ -15,10 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class TransactionalNoRollBackFor1Test {
 
-
     @Autowired
     private Service2 service2;
-
 
     @Autowired
     private OneToOneOneDirectional1Service oneToOneOneDirectional1Service;
