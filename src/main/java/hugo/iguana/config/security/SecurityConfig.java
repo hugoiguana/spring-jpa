@@ -33,16 +33,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JWTUtil jwtUtil;
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/h2-console/**"
+            "/h2-console/**",
+            "/querys/**"
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-            "/users/**",
+            "/users/**"
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
             "/users/**"
     };
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

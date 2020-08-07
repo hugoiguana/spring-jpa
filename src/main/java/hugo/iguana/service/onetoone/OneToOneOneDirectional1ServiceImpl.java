@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Arrays.asList;
+
 @Service
 @Transactional
 public class OneToOneOneDirectional1ServiceImpl implements OneToOneOneDirectional1Service {
@@ -48,6 +50,31 @@ public class OneToOneOneDirectional1ServiceImpl implements OneToOneOneDirectiona
     }
 
     @Override
+    public void update1() {
+        OneToOneOneDirectional1 entity = repository.findById1(1l).get();
+        entity.setName("BLZ");
+    }
+
+    @Override
+    public void update2() {
+        long countUpdated;
+        String name;
+        OneToOneOneDirectional1 entity = repository.findById1(1l).get();
+        System.out.println("#########" + entity.getName() + "#########");
+        entityManager.detach(entity);
+
+        countUpdated = repository.updateNameById(1l, "Hugo teste");
+        entity = repository.findById1(1l).get();
+        System.out.println("#########" + entity.getName() + "#########");
+        entityManager.detach(entity);
+
+        countUpdated = repository.updateNameById2(1l, "Gabriel lindo");
+        entity = repository.findById1(1l).get();
+        System.out.println("#########" + entity.getName() + "#########");
+
+    }
+
+    @Override
     public void deleteAll() {
         repository.deleteAll();
     }
@@ -57,4 +84,11 @@ public class OneToOneOneDirectional1ServiceImpl implements OneToOneOneDirectiona
         repository.delete(oneToOneOneDirectional1);
     }
 
+    @Override
+    public void delete() {
+        Optional<OneToOneOneDirectional1> e1 = repository.findById1(1l);
+        repository.delete(e1.get());
+        repository.deleteById(1l);
+        long deletedCount = repository.deleteByIdIn(asList(1l, 2l));
+    }
 }

@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Transactional
 public interface OneToOneOneDirectional1Repository extends JpaRepository<OneToOneOneDirectional1, Long>,
-        QuerydslPredicateExecutor<OneToOneOneDirectional1> {
+        QuerydslPredicateExecutor<OneToOneOneDirectional1>, OneToOneOneDirectional1RepositoryCustom {
 
     @Query("select o from OneToOneOneDirectional1 o where o.id = ?1")
     Optional<OneToOneOneDirectional1> findById1(Long id);

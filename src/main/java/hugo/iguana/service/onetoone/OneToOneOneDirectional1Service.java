@@ -19,4 +19,8 @@ public interface OneToOneOneDirectional1Service {
 
     void delete(OneToOneOneDirectional1 oneToOneOneDirectional1);
 
+    void delete();
+
+    void update1();
+    void update2();
 }
